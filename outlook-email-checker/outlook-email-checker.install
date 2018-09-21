@@ -1,0 +1,9 @@
+post_install() {
+    echo "installing the dependencies"
+    pip install -r /usr/share/outlook-email-checker/requirements.txt
+}
+
+post_upgrade() {
+    echo "installing the dependencies"
+    pip install -r /usr/share/outlook-email-checker/requirements.txt
+}
