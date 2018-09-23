@@ -5,7 +5,7 @@ pkgrel=1
 epoch=
 pkgdesc="checks when your battery level is low, and hibernates or sends a notification"
 arch=("any")
-url="https://gist.github.com/ArnaudParan/f551b93e8d7ca2b8af114ddc0aa81dc7"
+url="https://github.com/ArnaudParan/battery_checker"
 license=('unknown')
 groups=()
 depends=()
@@ -19,27 +19,29 @@ backup=()
 options=()
 install=
 changelog=
-source=("https://gist.github.com/ArnaudParan/f551b93e8d7ca2b8af114ddc0aa81dc7/archive/709e8d32b0f4782a20cecc3a1f645f1a64529ca1.zip")
+source=("git://github.com/ArnaudParan/${pkgname}/")
 noextract=()
 md5sums=(SKIP)
 validpgpkeys=()
-archive_name="f551b93e8d7ca2b8af114ddc0aa81dc7-709e8d32b0f4782a20cecc3a1f645f1a64529ca1"
 
 prepare() {
-	cd "$archive_name"
+	cd "$pkgname"
 }
 
 build() {
-	cd "$archive_name"
+	cd "$pkgname"
 }
 
 check() {
-	cd "$archive_name"
+	cd "$pkgname"
 }
 
 package() {
-	cd "$archive_name"
-	install -D -o root "./98-discharging.rules" "$pkgdir/etc/udev/rules.d/98-discharging.rules"
-	install -D -o root "./99-lowbat.rules" "$pkgdir/etc/udev/rules.d/99-lowbat.rules"
-	install -D -o root -m 750 "./notify-send-all" "$pkgdir/usr/local/bin/notify-send-all"
+	cd "$pkgname"
+	install -D -o root -m 644 "./udev/98-discharging.rules" "$pkgdir/etc/udev/rules.d/98-discharging.rules"
+	install -D -o root -m 644 "./udev/99-lowbat.rules" "$pkgdir/etc/udev/rules.d/99-lowbat.rules"
+	install -D -o root -m 754 "./bin/notify-send-all" "$pkgdir/usr/local/bin/notify-send-all"
+	install -D -o root -m 754 "./bin/battery_checker" "$pkgdir/usr/local/bin/battery_checker"
+	install -D -o root -m 644 "./systemd/battery_checker.service" "$pkgdir/etc/systemd/system/battery_checker.service"
+	install -D -o root -m 644 "./systemd/battery_checker.timer" "$pkgdir/etc/systemd/system/battery_checker.timer"
 }
