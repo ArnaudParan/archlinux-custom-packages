@@ -1,0 +1,45 @@
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=airtame
+pkgver=3.3.1
+pkgrel=1
+epoch=
+pkgdesc=""
+arch=("x86_64")
+url="https://airtame.com/start/"
+license=('unknown')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("http://downloads-cdn.airtame.com/application/ga/lin_x64/releases/$pkgname-application-$pkgver.tar.gz")
+noextract=()
+md5sums=(6370c4194842c6831108f7a3edef9366)
+validpgpkeys=()
+
+prepare() {
+	cd "$pkgname-application-$pkgver"
+}
+
+build() {
+	cd "$pkgname-application-$pkgver"
+}
+
+check() {
+	cd "$pkgname-application-$pkgver"
+}
+
+package() {
+	cd "$pkgname-application-$pkgver"
+	install -d $pkgdir/opt/airtame-application
+	cp -a ./ $pkgdir/opt/airtame-application/
+	install -d $pkgdir/usr/share/applications/
+	cp ./airtame-application.desktop $pkgdir/usr/share/applications/
+}

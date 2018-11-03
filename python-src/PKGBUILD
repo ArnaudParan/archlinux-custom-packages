@@ -1,0 +1,55 @@
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=python-src
+pkgver=3.6.5
+pkgrel=1
+epoch=
+pkgdesc=""
+arch=(x86_64)
+url="https://docs.python.org/"
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz")
+noextract=()
+md5sums=(9f49654a4d6f733ff3284ab9d227e9fd)
+validpgpkeys=()
+
+prepare() {
+	cd "Python-$pkgver"
+}
+
+build() {
+	cd "Python-$pkgver"
+	./configure --prefix=/usr
+	make
+	#make test
+}
+
+check() {
+	cd "Python-$pkgver"
+	#make -k check
+}
+
+package() {
+	cd "Python-$pkgver"
+	make DESTDIR="$pkgdir/" install
+	rm "$pkgdir/usr/bin/2to3"
+	rm "$pkgdir/usr/bin/idle3"
+	rm "$pkgdir/usr/bin/pydoc3"
+	rm "$pkgdir/usr/bin/python3"
+	rm "$pkgdir/usr/bin/python3.6-config"
+	rm "$pkgdir/usr/bin/python3-config"
+	rm "$pkgdir/usr/bin/pyvenv"
+	rm "$pkgdir/usr/share/man/man1/python3.1"
+	rm "$pkgdir/usr/lib/pkgconfig/python3.pc"
+}
