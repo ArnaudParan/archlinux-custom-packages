@@ -1,0 +1,45 @@
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=google-chrome
+pkgver=stable_current_amd64
+pkgrel=1
+epoch=
+pkgdesc=""
+arch=(x86_64)
+url="https://www.google.com/chrome"
+license=('unknown')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("https://dl.google.com/linux/direct/$pkgname-$pkgver.deb")
+noextract=()
+md5sums=(SKIP)
+validpgpkeys=()
+
+prepare() {
+	mkdir "$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
+	tar xJf ../data.tar.xz .
+	chmod 4755 ./opt/google/chrome/chrome-sandbox
+}
+
+build() {
+	cd "$pkgname-$pkgver"
+}
+
+check() {
+	cd "$pkgname-$pkgver"
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	cp -r ./ "$pkgdir/"
+}
