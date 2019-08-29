@@ -1,0 +1,49 @@
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=signal
+pkgver=1.26.2
+pkgrel=1
+epoch=
+pkgdesc=""
+arch=(x86_64)
+url="https://signal.org/"
+license=('unknown')
+groups=()
+depends=('libnotify'
+         'libappindicator'
+         'libxtst'
+         'libnss_nis'
+         #'libasound'
+         'libxss')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_"$pkgver"_amd64.deb")
+noextract=()
+md5sums=(SKIP)
+validpgpkeys=()
+
+prepare() {
+	mkdir "$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
+	tar xJf ../data.tar.xz .
+}
+
+build() {
+	cd "$pkgname-$pkgver"
+}
+
+check() {
+	cd "$pkgname-$pkgver"
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	cp -r ./ "$pkgdir/"
+}
