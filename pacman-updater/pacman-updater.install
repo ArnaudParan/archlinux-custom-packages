@@ -6,7 +6,10 @@
 ## arg 1:  the new package version
 post_install() {
         systemctl daemon-reload
+	systemctl start pacman_updater.timer
 	systemctl enable pacman_updater.timer
+	systemctl start pacman_cache_cleaner.timer
+	systemctl enable pacman_cache_cleaner.timer
 }
 
 ## arg 1:  the new package version
@@ -18,14 +21,17 @@ post_install() {
 ## arg 1:  the new package version
 ## arg 2:  the old package version
 post_upgrade() {
-	systemctl disable pacman_updater.timer
         systemctl daemon-reload
+	systemctl restart pacman_updater.timer
 	systemctl enable pacman_updater.timer
+	systemctl restart pacman_cache_cleaner.timer
+	systemctl enable pacman_cache_cleaner.timer
 }
 
 ## arg 1:  the old package version
 pre_remove() {
         systemctl disable pacman_updater.timer
+	systemctl disable pacman_cache_cleaner.timer
 }
 
 ## arg 1:  the old package version
