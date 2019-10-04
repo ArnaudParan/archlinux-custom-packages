@@ -1,0 +1,48 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=pacman-updater
+pkgver=1.0.0
+pkgrel=5
+epoch=
+pkgdesc="Automatically updates pacman daily"
+arch=(any)
+url=""
+license=('BSD')
+groups=()
+depends=(pacman)
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("sources.tar.gz")
+noextract=()
+md5sums=(SKIP)
+validpgpkeys=()
+
+prepare() {
+	mv sources "$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
+}
+
+build() {
+	cd "$pkgname-$pkgver"
+}
+
+check() {
+	cd "$pkgname-$pkgver"
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	cp -r ./* "$pkgdir/"
+}

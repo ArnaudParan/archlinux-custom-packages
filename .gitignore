@@ -39,3 +39,5 @@ tags
 
 pkg
 src
+tmp
+*.pkg.tar.xz
