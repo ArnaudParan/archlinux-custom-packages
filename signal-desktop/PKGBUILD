@@ -48,5 +48,5 @@ check() {
 
 package() {
 	#cd "$pkgname-$pkgver"
-	tar xJf ../data.tar.xz --directory "$pkgdir"
+	tar xJf data.tar.xz --directory "$pkgdir"
 }
