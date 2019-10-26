@@ -1,0 +1,72 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=spotify-client
+pkgver=1.1.10
+pkgver_ext=546.ge08ef575-19
+pkgrel=1
+epoch=
+pkgdesc="Spotify streaming music client"
+arch=(x86_64)
+url="https://www.spotify.com/"
+license=('https://www.spotify.com/legal/end-user-agreement')
+groups=()
+depends=('alsa-lib>=1.0.14'
+         'glibc>=2.16'
+         'qt5-base'
+         #'libstdc++5'
+         'usbutils'
+         #'openssl-1.0'
+         'openssl'
+         'nspr'
+         'gtk2'
+         'nss'
+         'glib2'
+         'xdg-utils>=1.0.2'
+         'dbus'
+         'libcurl-gnutls'
+)
+makedepends=()
+checkdepends=()
+optdepends=('libnotify'
+            'ffmpeg'
+)
+provides=()
+conflicts=('spotify-client'
+           'spotify-client-gnome-support<0.8.0'
+           'spotify-client-qt<0.8.0'
+)
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("http://repository.spotify.com/pool/non-free/s/$pkgname/$pkgname""_$pkgver.$pkgver_ext""_amd64.deb")
+noextract=()
+md5sums=(ab544e7d35789b6cfddcb61dfe4bd1d9)
+sha1sums=(d10d3999de175b3046995d947829c4963de51775)
+sha256sums=(da49fd4d222ff7d719345fba6298f38a6422ef293bb43ada13cf857a694a12e6)
+validpgpkeys=()
+
+prepare() {
+	#install -d "$pkgname-$pkgver"
+	:
+}
+
+build() {
+	#cd "$pkgname-$pkgver"
+	:
+}
+
+check() {
+	#cd "$pkgname-$pkgver"
+	:
+}
+
+package() {
+	#cd "$pkgname-$pkgver"
+	tar xzf data.tar.gz --directory "$pkgdir"
+}

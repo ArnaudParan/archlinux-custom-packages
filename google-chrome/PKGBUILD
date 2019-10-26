@@ -11,12 +11,16 @@ groups=()
 depends=('ca-certificates'
          'fonts-liberation'
          'libappindicator'
-	 # libasound2>=1.0.16
+	 #libasound2>=1.0.16
+         'alsa-lib>=1.0.16'
          #libatk-bridge2.0-0>=2.5.3
          #libatk1.0-0>=2.2.0
          #libatspi2.0-0>=2.9.90
+         'at-spi2-core>=2.9.90'
+         'at-spi2-atk>=2.5.3'
          'atk'
 	 #libc6>=2.16
+         'glibc>=2.16'
          #libcairo2>=1.6.0
          'cairo'
 	 'libcups>=1.4.0'
@@ -25,6 +29,7 @@ depends=('ca-certificates'
 	 #libexpat1>=2.0.1
          'expat>=2.0.1'
 	 #libgcc1>=1:3.0
+         'gcc-libs'
 	 #libgdk-pixbuf2.0-0>=2.22.0
 	 'gdk-pixbuf2>=2.22.0'
          #libglib2.0-0>=2.31.8
@@ -80,7 +85,7 @@ md5sums=(SKIP)
 validpgpkeys=()
 
 prepare() {
-	mkdir "$pkgname-$pkgver"
+	install -d "$pkgname-$pkgver"
 	cd "$pkgname-$pkgver"
 	tar xJf ../data.tar.xz .
 	chmod 4755 ./opt/google/chrome/chrome-sandbox

@@ -30,7 +30,7 @@ md5sums=(SKIP)
 validpgpkeys=()
 
 prepare() {
-	mkdir "$pkgname-$pkgver"
+	install -d "$pkgname-$pkgver"
 	cd "$pkgname-$pkgver"
 	tar xJf ../data.tar.xz .
 }
