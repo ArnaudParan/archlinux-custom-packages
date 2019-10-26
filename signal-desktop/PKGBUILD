@@ -1,12 +1,12 @@
 # Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
-pkgname=signal
-pkgver=1.26.2
+pkgname=signal-desktop
+pkgver=1.27.4
 pkgrel=1
 epoch=
-pkgdesc=""
+pkgdesc="Private messaging from your desktop"
 arch=(x86_64)
 url="https://signal.org/"
-license=('unknown')
+license=(GPL3)
 groups=()
 depends=('libnotify'
          'libappindicator'
@@ -24,26 +24,29 @@ backup=()
 options=()
 install=
 changelog=
-source=("https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_"$pkgver"_amd64.deb")
+source=("https://updates.signal.org/desktop/apt/pool/main/s/$pkgname/$pkgname""_$pkgver""_amd64.deb")
 noextract=()
-md5sums=(SKIP)
+md5sums=(bdea577fbd07f838c87e89f16c3717f7)
+sha1sums=(a943b8ce079762b724e9348a31851d313471a263)
+sha256sums=(5297d7efe843c61ee5e874009a076ec5b6f74974b79675f6c4a9ff0e8e0eeaab)
 validpgpkeys=()
 
 prepare() {
-	install -d "$pkgname-$pkgver"
-	cd "$pkgname-$pkgver"
-	tar xJf ../data.tar.xz .
+	#install -d "$pkgname-$pkgver"
+	:
 }
 
 build() {
-	cd "$pkgname-$pkgver"
+	#cd "$pkgname-$pkgver"
+	:
 }
 
 check() {
-	cd "$pkgname-$pkgver"
+	#cd "$pkgname-$pkgver"
+	:
 }
 
 package() {
-	cd "$pkgname-$pkgver"
-	cp -r ./ "$pkgdir/"
+	#cd "$pkgname-$pkgver"
+	tar xJf ../data.tar.xz --directory "$pkgdir"
 }
