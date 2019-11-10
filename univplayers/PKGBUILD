@@ -5,7 +5,7 @@
 
 # Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
 pkgname=univplayers
-pkgver=1.0.2
+pkgver=1.0.3
 pkgrel=1
 epoch=
 pkgdesc="playerctl like but lighter and with more functionnalities"
@@ -26,7 +26,7 @@ install=
 changelog=
 source=("$pkgname-$pkgver.tar.gz::https://codeload.github.com/ArnaudParan/$pkgname/tar.gz/$pkgver")
 noextract=()
-md5sums=(f345a2981919940e0580143555aad9e6)
+md5sums=(7f18069afc031d5f8eac8bc93730c831)
 validpgpkeys=()
 
 build() {
