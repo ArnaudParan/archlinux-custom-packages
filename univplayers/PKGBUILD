@@ -1,0 +1,46 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=univplayers
+pkgver=1.0.2
+pkgrel=1
+epoch=
+pkgdesc="playerctl like but lighter and with more functionnalities"
+arch=(x86_64)
+url="https://github.com/ArnaudParan/univplayers"
+license=('BSD')
+groups=()
+depends=('glibc')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("$pkgname-$pkgver.tar.gz::https://codeload.github.com/ArnaudParan/$pkgname/tar.gz/$pkgver")
+noextract=()
+md5sums=(f345a2981919940e0580143555aad9e6)
+validpgpkeys=()
+
+build() {
+	cd "$pkgname-$pkgver"
+	make release
+}
+
+check() {
+	cd "$pkgname-$pkgver"
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	install -d "$pkgdir/usr/bin"
+	cp ./bin/release/univplayers "$pkgdir/usr/bin/"
+	chmod 755 "$pkgdir/usr/bin/univplayers"
+}
