@@ -1,0 +1,133 @@
+# This is a default template for a post-install scriptlet.
+# Uncomment only required functions and remove any functions
+# you don't need (and this header).
+
+## arg 1:  the new package version
+#pre_install() {
+# do something here
+#}
+
+## arg 1:  the new package version
+post_install() {
+	USER=${SUDO_USER:-"$(users)"}
+	USER_ID=$(id -u ${USER})
+	ENV=$(ps --no-headers -o comm 1)
+
+	export XDG_RUNTIME_DIR="/run/user/${USER_ID}"
+	export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+
+	case "$1" in
+		configure)
+			case "$ENV" in
+				init)
+					update-rc.d nordvpn defaults &>/dev/null || :
+					/etc/init.d/nordvpn restart &>/dev/null || :
+					;;
+				systemd)
+					systemctl daemon-reload &>/dev/null || :
+					if (! systemctl list-units --full -all | grep -Fq "nordvpnd.service"); then
+						mv /usr/lib/systemd/system/nordvpnd.* /etc/systemd/system/ &>/dev/null || :
+						systemctl daemon-reload &>/dev/null || :
+					fi
+					systemctl enable nordvpnd.socket &>/dev/null || :
+					systemctl enable nordvpnd.service &>/dev/null || :
+					systemctl start nordvpnd.socket &>/dev/null || :
+					systemctl start nordvpnd.service &>/dev/null || :
+					;;
+				*)
+					echo "[ERROR] Unknown environment \`$ENV'"
+					# exit -1
+					;;
+			esac
+
+			su -c 'source /usr/share/bash-completion/completions/nordvpn' "${USER}" &>/dev/null || :
+
+			if [[ -z "$2" ]]; then
+				installSuccess="NordVPN for Linux successfully installed!"
+				quickTutorial="To get started, type 'nordvpn login' and enter your NordVPN account details. Then type 'nordvpn connect' and you’re all set! If you need help using the app, use the command 'nordvpn --help'."
+				echo ${installSuccess}
+				echo ${quickTutorial}
+			fi
+			;;
+		abort-upgrade|abort-remove|abort-deconfigure)
+			;;
+		*)
+			echo "[ERROR] postinst called with unknown argument \`$1'" >&2
+			# exit 1
+			;;
+	esac
+
+	# exit 0
+}
+
+## arg 1:  the new package version
+## arg 2:  the old package version
+#pre_upgrade() {
+# do something here
+#}
+
+## arg 1:  the new package version
+## arg 2:  the old package version
+#post_upgrade() {
+# do something here
+#}
+
+## arg 1:  the old package version
+pre_remove() {
+	ENV=$(ps --no-headers -o comm 1)
+
+	case "$1" in
+		remove|upgrade|deconfigure)
+			chattr -i /var/lib/nordvpn/data/* &>/dev/null || :
+			case "$ENV" in
+				init)
+					/etc/init.d/nordvpn stop &>/dev/null || :
+					update-rc.d -f nordvpn remove &>/dev/null || :
+					;;
+				systemd)
+					systemctl stop nordvpnd.service &>/dev/null || :
+					systemctl stop nordvpnd.socket &>/dev/null || :
+					systemctl disable nordvpnd.service &>/dev/null || :
+					systemctl disable nordvpnd.socket &>/dev/null || :
+					systemctl daemon-reload &>/dev/null || :
+					;;
+				*)
+					echo "[ERROR] Unknown environment \`$ENV'"
+					# exit -1
+					;;
+			esac
+			;;
+		*)
+			echo "prerm called with unknown argument \`$1'" >&2
+			# exit 1
+			;;
+	esac
+
+# exit 0
+}
+
+## arg 1:  the old package version
+post_remove() {
+	case "$1" in
+		remove|purge)
+			rm -f /usr/share/zsh/functions/Completion/Unix/_nordvpn
+			rm -f /usr/share/bash-completion/completions/nordvpn
+			rm -f /usr/lib/systemd/system/nordvpnd.*
+			rm -f /etc/systemd/system/nordvpnd.*
+			rm -f /etc/init.d/nordvpn
+			rm -rf /root/.config/nordvpn
+			rm -rf /home/*/.config/nordvpn
+			rm -rf /usr/share/doc/nordvpn
+			rm -rf /var/lib/nordvpn
+			rm -rf /var/log/nordvpn
+			;;
+		disappear|upgrade|failed-upgrade|abort-install|abort-upgrade)
+			;;
+		*)
+			echo "$0: didn't understand being called with \`$1'" 1>&2
+			# exit 0
+			;;
+	esac
+
+# exit 0
+}

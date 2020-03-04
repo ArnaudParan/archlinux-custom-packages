@@ -1,0 +1,59 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=nordvpn
+pkgver=3.1.0
+pkgrel=3
+epoch=
+pkgdesc="command line app for nordvpn"
+arch=(x86_64)
+url="https://nordvpn.com/"
+license=(unknown)
+groups=()
+depends=('gnupg')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("$pkgname""_$pkgver-0_amd64.deb")
+noextract=()
+md5sums=(SKIP)
+validpgpkeys=()
+
+prepare() {
+	mkdir "$pkgname-$pkgver"
+	tar xJf data.tar.xz -C "$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
+	# patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
+	mv ./usr/sbin/* ./usr/bin
+	rmdir ./usr/sbin
+	install -d ./etc/systemd/system/
+	cp ./usr/lib/systemd/system/nordvpnd.service ./etc/systemd/system/
+	cp ./usr/lib/systemd/system/nordvpnd.socket ./etc/systemd/system/
+}
+
+build() {
+	cd "$pkgname-$pkgver"
+	# ./configure --prefix=/usr
+	# make
+}
+
+check() {
+	cd "$pkgname-$pkgver"
+	# make -k check
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	# make DESTDIR="$pkgdir/" install
+	cp -r ./ "$pkgdir/"
+}
