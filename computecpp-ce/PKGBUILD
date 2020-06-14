@@ -1,0 +1,42 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=computecpp-ce
+pkgver=2.0.0
+pkgrel=3
+epoch=
+pkgdesc=""
+arch=(x86_64)
+url="https://developer.codeplay.com/products/computecpp/ce/download"
+license=(unknown)
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("$pkgname-$pkgver-$arch-linux-gnu.tar.gz")
+noextract=()
+md5sums=(ce2951940c8fdc779bbf96e43b1efb70)
+sha256sums=(2e476517dc7c3c98b780e9c6db119e9d54eb8b86d4a97b0a1ff33ab5c5bbb148)
+validpgpkeys=()
+
+package() {
+	cd "ComputeCpp-CE-$pkgver-$arch-linux-gnu"
+	cp -r ./* "$pkgdir/"
+	rm "$pkgdir"/bin/ld.lld
+	rm "$pkgdir"/bin/lld
+	rm "$pkgdir"/bin/lld-link
+	mkdir "$pkgdir"/usr
+	mv "$pkgdir"/lib "$pkgdir"/usr/lib
+	mv "$pkgdir"/bin "$pkgdir"/usr/bin
+}
