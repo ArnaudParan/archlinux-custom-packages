@@ -6,7 +6,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=nordvpn
 pkgver=3.7.3
-pkgrel=2
+pkgrel=3
 epoch=
 pkgdesc="command line app for nordvpn"
 arch=(x86_64)
@@ -24,7 +24,7 @@ backup=()
 options=()
 install=
 changelog=
-source=("$pkgname""_$pkgver""_amd64.deb")
+source=(https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/"$pkgname""_$pkgver""_amd64.deb")
 noextract=()
 md5sums=(e92ebd381aeb23416c9817d1d10b6b55)
 sha256sums=(9b1e2b66bdbbe4313fc4b2dae09098e757adc4b09d6426efc35660ad47500f16)
