@@ -37,9 +37,9 @@ prepare() {
 	# patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
 	mv ./usr/sbin/* ./usr/bin
 	rmdir ./usr/sbin
-	install -d ./etc/systemd/system/
-	cp ./usr/lib/systemd/system/nordvpnd.service ./etc/systemd/system/
-	cp ./usr/lib/systemd/system/nordvpnd.socket ./etc/systemd/system/
+	#install -d ./etc/systemd/system/
+	#cp ./usr/lib/systemd/system/nordvpnd.service ./etc/systemd/system/
+	#cp ./usr/lib/systemd/system/nordvpnd.socket ./etc/systemd/system/
 }
 
 build() {
