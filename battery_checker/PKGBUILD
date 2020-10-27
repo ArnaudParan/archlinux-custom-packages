@@ -40,8 +40,7 @@ package() {
 	cd "$pkgname"
 	install -D -o root -m 644 "./udev/98-discharging.rules" "$pkgdir/etc/udev/rules.d/98-discharging.rules"
 	install -D -o root -m 644 "./udev/99-lowbat.rules" "$pkgdir/etc/udev/rules.d/99-lowbat.rules"
-	install -D -o root -m 754 "./bin/notify-send-all" "$pkgdir/usr/local/bin/notify-send-all"
 	install -D -o root -m 754 "./bin/battery_checker" "$pkgdir/usr/local/bin/battery_checker"
-	install -D -o root -m 644 "./systemd/battery_checker.service" "$pkgdir/etc/systemd/system/battery_checker.service"
-	install -D -o root -m 644 "./systemd/battery_checker.timer" "$pkgdir/etc/systemd/system/battery_checker.timer"
+	install -D -o root -m 644 "./systemd/battery_checker.service" "$pkgdir/usr/lib/systemd/user/battery_checker.service"
+	install -D -o root -m 644 "./systemd/battery_checker.timer" "$pkgdir/usr/lib/systemd/user/battery_checker.timer"
 }

@@ -1,0 +1,57 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=slack
+pkgver=4.10.3
+pkgrel=1
+epoch=
+pkgdesc=""
+arch=(x86_64)
+url="https://slack.com/"
+license=('unknown')
+groups=()
+depends=('gtk3'
+         'libappindicator-gtk3'
+         'libnotify'
+         'nss>=3.0'
+         'libxss>=1.0.0'
+         'libxtst'
+         'xdg-utils'
+         'at-spi2-core'
+         'libutil-linux'
+         'kde-cli-tools'
+         'trash-cli'
+         'glib2'
+         'gvfs'
+)
+makedepends=()
+checkdepends=()
+optdepends=('pulseaudio'
+            'alsa-lib'
+            'lsb-release'
+            'gnome-keyring'
+            'libgnome-keyring'
+)
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("https://downloads.slack-edge.com/linux_releases/$pkgname-desktop-$pkgver-amd64.deb")
+noextract=()
+md5sums=(3fead3252f094e6785121a5c7832b2eb)
+sha256sums=(2eb79127ff0e17f2344338b22fbbc44482d07fbd3841f4a4929ca1e9a390d2be)
+sha512sums=(2c5345c35299943a69b260bbc4a4ff3e5c373610b043b4d4583ec2420f69bd16001390336482a9bc5fcc87b24aaa424282a62612efa0b3acac6b2606b6bcb89f)
+validpgpkeys=()
+
+package() {
+	mkdir -p "$pkgname-$pkgver"
+	tar xJf data.tar.xz -C "$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
+	cp ./* "$pkgdir/" -r
+}

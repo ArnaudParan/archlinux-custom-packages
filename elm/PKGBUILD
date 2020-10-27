@@ -1,0 +1,38 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Arnaud Paran <paran.arnaud@gmail.com>
+pkgname=elm-lang
+pkgver=0.19.1
+pkgrel=1
+epoch=
+pkgdesc="elm language"
+arch=(x86_64)
+url="https://elm-lang.org/"
+license=('BSD')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz")
+noextract=()
+md5sums=(9584db6d744bc3179538ca6f7b3e0ff1)
+sha256sums=(e44af52bb27f725a973478e589d990a6428e115fe1bb14f03833134d6c0f155c)
+sha512sums=(8c40c32070b0f1b565a212d138ee12406e267ba1c16d650341e4f659f68b1e3a2a67243f1a314dd8c6714666b7f31c2ddf84f5fc54b41521273c6fa262536148)
+validpgpkeys=()
+
+package() {
+	chmod +x binary-for-linux-64-bit
+	install -d "$pkgdir"/usr/local/bin
+	cp binary-for-linux-64-bit "$pkgdir"/usr/local/bin/elm
+}
